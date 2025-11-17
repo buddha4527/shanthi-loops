@@ -1,379 +1,318 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-[#052016] text-[#E7F4EC]">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Shanti Loops – Village Stays in Wayanad</title>
-
-  <!-- Tailwind CSS via CDN -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shanti Loops · Wayanad Village Stays</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              dark: '#052016',
-              mid: '#0B3B2A',
-              light: '#E7F4EC',
-              accent: '#F6A823',
-            },
-          },
-          fontFamily: {
-            sans: ['Poppins', 'system-ui', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Meta -->
-  <meta name="description" content="Shanti Loops curates peaceful village stays, homestays and long-stay retreats around Thirunelly & Mananthavady in Wayanad, Kerala. Book via WhatsApp." />
-  <meta property="og:title" content="Shanti Loops – Village Stays in Wayanad" />
-  <meta property="og:description" content="Slow down, breathe, and return to Shanti. Village homes, forest edges and river-side stays in Wayanad, Kerala." />
-  <meta property="og:type" content="website" />
-
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700&display=swap" rel="stylesheet">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    .nav-blur {
-      backdrop-filter: blur(14px);
-    }
-    .slide-active {
-      opacity: 1;
-      transform: translateX(0);
-      z-index: 10;
-    }
-    .slide-hidden {
+    html, body { font-family: 'Poppins', system-ui, sans-serif; }
+    /* Hide scrollbars in carousel for aesthetics */
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    /* Fade-in animation for sections */
+    .fade-in {
       opacity: 0;
-      transform: translateX(5%);
-      z-index: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(.5,.2,.1,1), transform 0.8s cubic-bezier(.5,.2,.1,1);
     }
-    .fade-section {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-section.is-visible {
+    .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
     }
+    /* Header blur */
+    .header-bg {
+      background: rgba(5, 32, 22, 0.98);
+      backdrop-filter: blur(8px) saturate(1.3);
+      border-bottom: 1px solid #0B3B2A;
+      box-shadow: 0 2px 12px rgba(11, 59, 42, 0.06);
+      transition: background 0.3s;
+    }
+    /* Simple fade/slide for carousel */
+    .slide {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transform: translateX(32px);
+      transition: opacity 0.7s, transform 0.7s;
+      pointer-events: none;
+    }
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+    /* Slide dots */
+    .carousel-dot {
+      cursor: pointer;
+      transition: background 0.3s, box-shadow 0.3s;
+      border: none;
+      outline: none;
+    }
+    .carousel-dot.active {
+      background: #F6A823;
+      box-shadow: 0 0 0 2px #F6A82344;
+    }
   </style>
 </head>
-<body class="font-sans bg-brand-light text-slate-900" id="top">
-  <!-- NAVBAR -->
-  <header class="fixed top-0 inset-x-0 z-40 bg-brand-dark/90 nav-blur shadow-sm">
-    <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
-      <a href="#top" class="text-white font-semibold tracking-wide text-lg">
-        Shanti <span class="text-brand-accent">Loops</span>
-      </a>
+<body class="bg-[#052016] min-h-screen flex flex-col">
 
-      <div class="hidden md:flex items-center gap-6 text-sm text-emerald-100">
-        <a href="#about" class="hover:text-brand-accent transition">About</a>
-        <a href="#stays" class="hover:text-brand-accent transition">Stays</a>
-        <a href="#experiences" class="hover:text-brand-accent transition">Experiences</a>
-        <a href="#how" class="hover:text-brand-accent transition">How it works</a>
-      </div>
-
-      <a
-        href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
-        target="_blank"
-        class="hidden sm:inline-flex items-center gap-2 bg-brand-accent text-brand-dark px-4 py-2 rounded-full text-xs font-semibold shadow hover:bg-amber-400 transition"
-      >
+  <!-- Header / Navbar -->
+  <header id="mainHeader" class="fixed top-0 left-0 w-full z-40 header-bg text-[#E7F4EC]">
+    <nav class="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="#" class="text-xl sm:text-2xl font-bold tracking-wide text-[#F6A823] select-none">Shanti Loops</a>
+      <!-- Links: Hidden on mobile, show on md+ screens -->
+      <ul class="hidden md:flex gap-6 flex-1 justify-center text-[#E7F4EC] font-medium">
+        <li><a href="#about" class="hover:text-[#F6A823] transition">About</a></li>
+        <li><a href="#stays" class="hover:text-[#F6A823] transition">Stays</a></li>
+        <li><a href="#experiences" class="hover:text-[#F6A823] transition">Experiences</a></li>
+        <li><a href="#howitworks" class="hover:text-[#F6A823] transition">How it works</a></li>
+      </ul>
+      <!-- WhatsApp button -->
+      <a href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
+        class="ml-2 px-5 py-2 rounded-full bg-[#F6A823] text-[#052016] font-semibold shadow-lg hover:bg-[#e09112] transition"
+        target="_blank" rel="noopener">
         WhatsApp us
       </a>
     </nav>
   </header>
+  <div class="pt-16"></div>
 
-  <main class="pt-20">
-    <!-- HERO SECTION with CAROUSEL -->
-    <section class="max-w-6xl mx-auto px-4 pt-6 pb-16 grid md:grid-cols-2 gap-10 items-center">
-      <!-- Left text -->
-      <div class="fade-section">
-        <p class="text-[11px] tracking-[0.28em] uppercase text-emerald-700 mb-3">
-          Wayanad · Village · Forest · River
-        </p>
-        <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">
-          Slow down, breathe,<br class="hidden sm:block" />
-          and return to <span class="text-brand-accent">Shanti</span>.
+  <!-- Hero Section -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-16 fade-in" id="hero">
+    <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
+      <!-- Left: Headline and buttons -->
+      <div class="flex-1">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-[#F6A823] drop-shadow-sm">
+          Slow down. Return to Shanti.<br><span class="text-[#E7F4EC]">Stay gently in Wayanad.</span>
         </h1>
-        <p class="text-sm md:text-base text-slate-700 mb-5">
-          Shanti Loops connects you to peaceful village homes, homestays and long-stay retreats
-          around Thirunelly &amp; Mananthavady – by the Brahmagiri hills, Kalindi river, paddy fields and coffee estates.
-          No apps or forms. Just a simple WhatsApp conversation to plan your stay.
+        <p class="text-[#E7F4EC]/80 mb-5 text-lg max-w-xl">
+          Curated village homes and homestays surrounded by forest, coffee estates, paddy fields and streams. Experience slow living near the Brahmagiri hills, Kalindi river and quiet corners of Wayanad.
         </p>
-
-        <div class="flex flex-wrap gap-3">
-          <a
-            href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
+        <div class="flex gap-4 flex-col sm:flex-row mb-6">
+          <a href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
             target="_blank"
-            class="inline-flex items-center justify-center gap-2 bg-brand-accent text-brand-dark px-5 py-2.5 rounded-full font-semibold text-sm shadow hover:bg-amber-400 transition"
-          >
-            Plan a stay on WhatsApp
-          </a>
-          <a
-            href="#about"
-            class="inline-flex items-center justify-center px-4 py-2.5 rounded-full border border-brand-accent text-brand-dark text-sm font-medium hover:bg-white/70 transition"
-          >
-            Know more
-          </a>
+            class="px-6 py-3 rounded-full bg-[#F6A823] hover:bg-[#e09112] text-[#052016] font-semibold shadow-md transition text-center"
+            >Plan a stay on WhatsApp</a>
+          <a href="#about"
+            class="px-6 py-3 rounded-full bg-[#0B3B2A] hover:bg-[#052016] text-[#E7F4EC] font-semibold shadow transition text-center border border-[#F6A823]"
+            >Know more</a>
         </div>
-
-        <p class="text-xs text-slate-500 mt-3">
-          Quick replies · Custom dates · Home food &amp; local support · English / മലയാളം
-        </p>
       </div>
-
-      <!-- Right: Hero "Image" Carousel (no external libs) -->
-      <div class="relative h-64 md:h-80 fade-section">
-        <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-brand-dark via-emerald-800 to-brand-mid shadow-xl overflow-hidden">
-          <!-- Slide 1 -->
-          <div
-            class="absolute inset-0 flex flex-col items-start justify-end px-5 py-5 text-emerald-50 slide-active transition-all duration-700"
-            data-slide="0"
-          >
-            <p class="text-[11px] uppercase tracking-[0.2em] text-amber-200 mb-2">Forest edge · Wayanad</p>
-            <p class="text-lg font-semibold mb-1">Village homestays near Brahmagiri hills</p>
-            <p class="text-[11px] text-emerald-100/80">
-              Wake up to mist, coffee and bird calls – not traffic.
-            </p>
+      <!-- Right: Carousel -->
+      <div class="flex-1 w-full max-w-md md:max-w-[370px] relative min-h-[230px] md:min-h-[260px] flex items-center">
+        <div class="relative w-full h-[210px] sm:h-[230px] md:h-[260px] rounded-3xl shadow-xl overflow-hidden bg-gradient-to-tr from-[#0B3B2A] via-[#052016] to-[#F6A823]/20 flex items-center justify-center">
+          <!-- Slides -->
+          <div id="carouselSlides" class="w-full h-full relative">
+            <div class="slide active flex flex-col items-center justify-center w-full h-full p-8 text-center">
+              <span class="text-lg sm:text-xl font-bold text-[#F6A823]">Village homestays near Brahmagiri hills</span>
+              <div class="h-8"></div>
+              <div class="w-32 h-3 rounded-full bg-gradient-to-r from-[#E7F4EC]/40 via-[#F6A823]/40 to-[#0B3B2A]/50 blur-md mx-auto"></div>
+            </div>
+            <div class="slide flex flex-col items-center justify-center w-full h-full p-8 text-center">
+              <span class="text-lg sm:text-xl font-bold text-[#F6A823]">Walks to the Kalindi river & paddy fields</span>
+              <div class="h-8"></div>
+              <div class="w-32 h-3 rounded-full bg-gradient-to-r from-[#0B3B2A]/30 via-[#F6A823]/40 to-[#E7F4EC]/60 blur-md mx-auto"></div>
+            </div>
+            <div class="slide flex flex-col items-center justify-center w-full h-full p-8 text-center">
+              <span class="text-lg sm:text-xl font-bold text-[#F6A823]">Stay a week or a month – slow long stays</span>
+              <div class="h-8"></div>
+              <div class="w-32 h-3 rounded-full bg-gradient-to-r from-[#F6A823]/30 via-[#E7F4EC]/50 to-[#0B3B2A]/50 blur-md mx-auto"></div>
+            </div>
           </div>
-
-          <!-- Slide 2 -->
-          <div
-            class="absolute inset-0 flex flex-col items-start justify-end px-5 py-5 text-emerald-50 slide-hidden transition-all duration-700"
-            data-slide="1"
-          >
-            <p class="text-[11px] uppercase tracking-[0.2em] text-amber-200 mb-2">Kalindi river</p>
-            <p class="text-lg font-semibold mb-1">Walks to the river &amp; paddy fields</p>
-            <p class="text-[11px] text-emerald-100/80">
-              Evenings by the water, morning walks through fields and village lanes.
-            </p>
-          </div>
-
-          <!-- Slide 3 -->
-          <div
-            class="absolute inset-0 flex flex-col items-start justify-end px-5 py-5 text-emerald-50 slide-hidden transition-all duration-700"
-            data-slide="2"
-          >
-            <p class="text-[11px] uppercase tracking-[0.2em] text-amber-200 mb-2">Long stays</p>
-            <p class="text-lg font-semibold mb-1">Stay a week, or a month</p>
-            <p class="text-[11px] text-emerald-100/80">
-              Work remotely, write, reset or plan your next chapter with slow, quiet days.
-            </p>
+          <!-- Dots -->
+          <div id="carouselDots" class="absolute bottom-5 left-0 right-0 mx-auto flex gap-2 justify-center">
+            <button class="carousel-dot w-4 h-4 rounded-full bg-[#E7F4EC]/40 border-[#F6A823]"></button>
+            <button class="carousel-dot w-4 h-4 rounded-full bg-[#E7F4EC]/40 border-[#F6A823]"></button>
+            <button class="carousel-dot w-4 h-4 rounded-full bg-[#E7F4EC]/40 border-[#F6A823]"></button>
           </div>
         </div>
-
-        <!-- Dots -->
-        <div class="absolute bottom-3 inset-x-0 flex justify-center gap-2">
-          <button class="w-2.5 h-2.5 rounded-full bg-amber-300" data-dot="0"></button>
-          <button class="w-2.5 h-2.5 rounded-full bg-emerald-200/50" data-dot="1"></button>
-          <button class="w-2.5 h-2.5 rounded-full bg-emerald-200/50" data-dot="2"></button>
-        </div>
       </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="max-w-6xl mx-auto px-4 pb-16 fade-section">
-      <div class="grid md:grid-cols-2 gap-8 items-start">
-        <div>
-          <h2 class="text-xl md:text-2xl font-semibold text-brand-dark mb-3">What is Shanti Loops?</h2>
-          <p class="text-sm md:text-base text-slate-700 mb-3">
-            Shanti Loops is a small village-based project near Mananthavady &amp; Thirunelly. Instead of a big booking portal,
-            we quietly connect guests to a handful of trusted homes and stays that we personally know.
-          </p>
-          <p class="text-sm md:text-base text-slate-700 mb-3">
-            You message us on WhatsApp with your dates, number of people and rough budget. We suggest one or two options,
-            share photos and details, help you with route guidance and stay in touch while you are here.
-          </p>
-          <p class="text-sm md:text-base text-slate-700">
-            No rush, no fixed packages. Just honest stays in places where time moves slower and you can hear yourself think.
-          </p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-5 text-sm">
-          <h3 class="font-semibold text-brand-dark mb-3 text-sm">Where are the stays?</h3>
-          <ul class="space-y-2 text-slate-700">
-            <li>• Around Thirunelly temple, Brahmagiri foothills</li>
-            <li>• Villages near Kalindi river and small streams</li>
-            <li>• Coffee plantations, paddy fields and hill-view homes</li>
-            <li>• Quiet corners around Mananthavady for longer stays</li>
-          </ul>
-          <p class="mt-4 text-xs text-slate-500">
-            Full gallery and stay listings will come later. For now, every stay is curated personally over WhatsApp.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- STAYS / WHO IS IT FOR -->
-    <section id="stays" class="max-w-6xl mx-auto px-4 pb-16 fade-section">
-      <h2 class="text-xl md:text-2xl font-semibold text-brand-dark mb-4">Who is it for?</h2>
-      <div class="grid md:grid-cols-3 gap-5 text-sm">
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4 flex flex-col">
-          <h3 class="font-semibold text-brand-dark mb-2 text-sm">Short breaks</h3>
-          <p class="text-slate-700 flex-1">
-            2–4 day trips from Bangalore, Mysore, Calicut, Kochi or Kannur for those who want trees, rivers, chai and silence.
-          </p>
-          <p class="mt-3 text-[11px] text-slate-500">Ideal for couples, friends, small families.</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4 flex flex-col">
-          <h3 class="font-semibold text-brand-dark mb-2 text-sm">Work &amp; think time</h3>
-          <p class="text-slate-700 flex-1">
-            Week-long or month-long stays for remote workers, writers, designers, early-stage founders and anyone in transition.
-          </p>
-          <p class="mt-3 text-[11px] text-slate-500">Wi-Fi in select homes · Simpler, slower days.</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4 flex flex-col">
-          <h3 class="font-semibold text-brand-dark mb-2 text-sm">Slow travelers</h3>
-          <p class="text-slate-700 flex-1">
-            For people who like staying in one place, meeting the same tea-shop guy every day and learning the rhythms of a village.
-          </p>
-          <p class="mt-3 text-[11px] text-slate-500">Walks, bus rides, small routines – not checklists.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCES -->
-    <section id="experiences" class="max-w-6xl mx-auto px-4 pb-16 fade-section">
-      <h2 class="text-xl md:text-2xl font-semibold text-brand-dark mb-4">What can you do here?</h2>
-      <div class="grid md:grid-cols-4 gap-4 text-sm">
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold mb-2 text-sm text-brand-dark">Forest &amp; hill walks</h3>
-          <p class="text-slate-700">
-            Early morning and evening walks with views of Brahmagiri, birds and mist.
-          </p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold mb-2 text-sm text-brand-dark">River &amp; stream sides</h3>
-          <p class="text-slate-700">
-            Sit by the Kalindi or small village streams, read, talk or do nothing.
-          </p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold mb-2 text-sm text-brand-dark">Home food &amp; tea</h3>
-          <p class="text-slate-700">
-            Simple Kerala meals, village tea shops, local bakeries and toddy spots (if you’re curious).
-          </p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold mb-2 text-sm text-brand-dark">Quiet work &amp; journaling</h3>
-          <p class="text-slate-700">
-            Use the silence to think, write, plan or just let your brain cool down.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section id="how" class="max-w-6xl mx-auto px-4 pb-16 fade-section">
-      <h2 class="text-xl md:text-2xl font-semibold text-brand-dark mb-4">How it works</h2>
-      <div class="grid md:grid-cols-3 gap-5 text-sm">
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold text-brand-dark mb-2 text-sm">1 · Start a WhatsApp chat</h3>
-          <p class="text-slate-700">
-            Tell us your dates, number of people, budget range and what kind of vibe you want (quiet, social, deep jungle, etc.).
-          </p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold text-brand-dark mb-2 text-sm">2 · We suggest 1–2 stays</h3>
-          <p class="text-slate-700">
-            We check with our homestay &amp; village hosts and come back with options, photos and clear pricing.
-          </p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold text-brand-dark mb-2 text-sm">3 · You decide, we support</h3>
-          <p class="text-slate-700">
-            Once you decide, we guide you on routes, food options, local contacts and help you settle in when you arrive.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHATSAPP CTA -->
-    <section class="max-w-6xl mx-auto px-4 pb-12 fade-section">
-      <div class="bg-brand-dark rounded-3xl text-emerald-50 px-6 py-8 md:px-8 md:py-10 flex flex-col md:flex-row items-start md:items-center gap-6">
-        <div class="flex-1">
-          <h2 class="text-lg md:text-xl font-semibold mb-2">Ready to loop back to Shanti?</h2>
-          <p class="text-sm md:text-base text-emerald-100">
-            Drop us a message on WhatsApp with your dates and a short line about why you want to come.
-            We’ll respond as soon as we can with honest options – no spam, no pressure.
-          </p>
-        </div>
-        <div class="flex flex-col items-start gap-2">
-          <a
-            href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
-            target="_blank"
-            class="inline-flex items-center justify-center gap-2 bg-brand-accent text-brand-dark px-5 py-2.5 rounded-full font-semibold text-sm shadow hover:bg-amber-400 transition"
-          >
-            WhatsApp Shanti Loops
-          </a>
-          <p class="text-xs text-emerald-100/80">
-            WhatsApp only for now · English / മലയാളം
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="bg-brand-dark text-emerald-100 text-xs">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p>© <span id="year"></span> Shanti Loops · Wayanad, Kerala</p>
-      <p class="text-emerald-200/80">Website in early phase · Full listings and photos coming soon.</p>
     </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-8 py-10 fade-in" id="about">
+    <div class="flex flex-col md:flex-row gap-8 items-center">
+      <!-- Left: Description -->
+      <div class="flex-1">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-[#F6A823]">What is Shanti Loops?</h2>
+        <p class="text-[#E7F4EC]/90 mb-5 text-lg leading-relaxed">
+          Shanti Loops is a heart-led curation project. We don’t use portals, booking engines or listings. Each stay is suggested personally over WhatsApp – for travelers, remote workers and slow seekers. You tell us when, your kind of place, your vibe; we connect you with trusted homes set in nature. Each host shares local tips, food and route guidance. If you’re seeking calm, village routines, or just a pause, we’re here for you.
+        </p>
+        <p class="text-[#E7F4EC]/70 text-md">
+          Contact is always 1:1 over WhatsApp, in English or Malayalam. Discover a softer way to stay.
+        </p>
+      </div>
+      <!-- Right: Area Cards -->
+      <div class="flex-1 flex flex-col gap-4">
+        <div class="bg-[#0B3B2A]/80 rounded-2xl p-5 shadow-md">
+          <span class="font-bold text-[#F6A823]">Where the stays are:</span>
+          <ul class="mt-2 ml-2 text-[#E7F4EC]/90 list-disc text-base marker:text-[#F6A823]/80">
+            <li>Thirunelly village & Brahmagiri foothills</li>
+            <li>Kalindi river side homes</li>
+            <li>Paddy field and coffee estate cottages</li>
+            <li>Quiet edges near Mananthavady</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stays: Who is it for? Section -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-8 py-10 fade-in" id="stays">
+    <h2 class="text-2xl sm:text-3xl font-bold text-[#F6A823] mb-6 text-center">Who is it for?</h2>
+    <div class="grid sm:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition duration-200">
+        <span class="mb-2 text-[#F6A823] font-semibold text-lg">Short breaks <span class="text-[#E7F4EC]/50 text-base font-normal">(2–4 days)</span></span>
+        <p class="text-[#E7F4EC]/90 mb-2">For city folks (Bangalore, Mysore, Calicut, Kochi, Kannur) seeking recharge in green, village life and forest edges.</p>
+        <span class="text-[#E7F4EC]/50 text-sm">Quick weekends in real homes</span>
+      </div>
+      <!-- Card 2 -->
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition duration-200">
+        <span class="mb-2 text-[#F6A823] font-semibold text-lg">Work & think time <span class="text-[#E7F4EC]/50 text-base font-normal">(1–4 weeks)</span></span>
+        <p class="text-[#E7F4EC]/90 mb-2">For remote workers, writers, planners, people between places—quiet, strong WiFi, life in a village.</p>
+        <span class="text-[#E7F4EC]/50 text-sm">Unwind, focus, create</span>
+      </div>
+      <!-- Card 3 -->
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition duration-200">
+        <span class="mb-2 text-[#F6A823] font-semibold text-lg">Slow travelers <span class="text-[#E7F4EC]/50 text-base font-normal">(like a villager)</span></span>
+        <p class="text-[#E7F4EC]/90 mb-2">For those who love slow routines, living many days in one place. Local immersion in Kerala’s highland villages.</p>
+        <span class="text-[#E7F4EC]/50 text-sm">Stay, eat, shop like a local</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiences Section -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-8 py-10 fade-in" id="experiences">
+    <h2 class="text-2xl sm:text-3xl font-bold text-[#F6A823] mb-6 text-center">Experiences</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-5">
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-4 flex flex-col items-center">
+        <span class="text-3xl mb-2">🌲</span>
+        <span class="font-semibold text-[#F6A823] mb-1">Forest & hill walks</span>
+        <span class="text-sm text-[#E7F4EC]/80 text-center">Brahmagiri trails, local paths</span>
+      </div>
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-4 flex flex-col items-center">
+        <span class="text-3xl mb-2">🌊</span>
+        <span class="font-semibold text-[#F6A823] mb-1">River / stream sides</span>
+        <span class="text-sm text-[#E7F4EC]/80 text-center">Kalindi & village streams</span>
+      </div>
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-4 flex flex-col items-center">
+        <span class="text-3xl mb-2">🍵</span>
+        <span class="font-semibold text-[#F6A823] mb-1">Home food & tea shops</span>
+        <span class="text-sm text-[#E7F4EC]/80 text-center">Kerala kitchen & tiny stalls</span>
+      </div>
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-4 flex flex-col items-center">
+        <span class="text-3xl mb-2">📓</span>
+        <span class="font-semibold text-[#F6A823] mb-1">Quiet work & journaling</span>
+        <span class="text-sm text-[#E7F4EC]/80 text-center">Wifi, green corners, slow time</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works Section -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-8 py-10 fade-in" id="howitworks">
+    <h2 class="text-2xl sm:text-3xl font-bold text-[#F6A823] mb-6 text-center">How it works</h2>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-6 flex flex-col items-start">
+        <span class="font-bold text-xl text-[#F6A823] mb-2">1 · Start a WhatsApp chat</span>
+        <p class="text-[#E7F4EC]/85 mb-2 pl-1">Send dates, number of people, budget and your preferred stay vibe.</p>
+      </div>
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-6 flex flex-col items-start">
+        <span class="font-bold text-xl text-[#F6A823] mb-2">2 · We suggest curated stays</span>
+        <p class="text-[#E7F4EC]/85 mb-2 pl-1">You’ll get 1–2 options with photos, pricing, and local advice within hours.</p>
+      </div>
+      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-6 flex flex-col items-start">
+        <span class="font-bold text-xl text-[#F6A823] mb-2">3 · Decide & settle in</span>
+        <p class="text-[#E7F4EC]/85 mb-2 pl-1">You choose. We help with route guidance, WhatsApp, local support, and village contacts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp CTA strip -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-8 py-7 fade-in">
+    <div class="bg-[#0B3B2A] rounded-3xl shadow-lg p-7 flex flex-col sm:flex-row items-center gap-6">
+      <div class="flex-1">
+        <h3 class="text-xl sm:text-2xl font-bold text-[#F6A823] mb-2">Ready to loop back to Shanti?</h3>
+        <p class="text-[#E7F4EC]/90 mb-2">Message us – share your possible dates, how many people, budget, and any wishes. We’ll suggest stays personally.</p>
+        <span class="text-xs text-[#E7F4EC]/70">WhatsApp only for now · English / മലയാളം</span>
+      </div>
+      <div>
+        <a href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
+          target="_blank"
+          class="px-7 py-3 rounded-full bg-[#F6A823] hover:bg-[#e09112] text-[#052016] font-semibold shadow-md transition text-center"
+          >WhatsApp Shanti Loops</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-auto bg-[#052016] border-t border-[#0B3B2A]/60 py-6 text-center">
+    <span class="block text-[#E7F4EC]/90 text-sm mb-2">
+      © <span id="year"></span> Shanti Loops · Wayanad, Kerala
+    </span>
+    <span class="block text-[#E7F4EC]/70 text-xs">
+      Website in early phase · Full listings and photos coming soon.
+    </span>
   </footer>
 
+  <!-- Minimal JS: Carousel, fade-ins, year -->
   <script>
-    // Dynamic year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Carousel logic
+    const slides = Array.from(document.querySelectorAll("#carouselSlides .slide"));
+    const dots = Array.from(document.querySelectorAll("#carouselDots .carousel-dot"));
+    let current = 0;
+    let carouselTimer = null;
 
-    // Simple hero carousel
-    const slides = document.querySelectorAll('[data-slide]');
-    const dots = document.querySelectorAll('[data-dot]');
-    let currentSlide = 0;
-
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('slide-active', i === index);
-        slide.classList.toggle('slide-hidden', i !== index);
-      });
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('bg-amber-300', i === index);
-        dot.classList.toggle('bg-emerald-200/50', i !== index);
-      });
-      currentSlide = index;
+    function showSlide(idx) {
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === idx));
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === idx));
+      current = idx;
     }
-
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const index = Number(dot.getAttribute('data-dot'));
-        showSlide(index);
-      });
+    function nextSlide() {
+      showSlide((current+1)%slides.length);
+    }
+    function restartCarouselTimer() {
+      clearTimeout(carouselTimer);
+      carouselTimer = setTimeout(() => {
+        nextSlide();
+        restartCarouselTimer();
+      }, 6000);
+    }
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => { showSlide(i); restartCarouselTimer(); });
     });
+    showSlide(0); restartCarouselTimer();
 
-    setInterval(() => {
-      const next = (currentSlide + 1) % slides.length;
-      showSlide(next);
-    }, 6000);
-
-    // Fade-in on scroll
-    const fadeSections = document.querySelectorAll('.fade-section');
-    const observer = new IntersectionObserver(
-      entries => {
+    // IntersectionObserver for fade-in sections
+    const observer = new window.IntersectionObserver(
+      (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+            entry.target.classList.add("visible");
           }
         });
       },
       { threshold: 0.15 }
     );
-    fadeSections.forEach(sec => observer.observe(sec));
+    document.querySelectorAll(".fade-in").forEach(el => { observer.observe(el); });
+
+    // Dynamic year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Header blur, dark bg on scroll
+    const header = document.getElementById("mainHeader");
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 8) header.classList.add("header-bg");
+      else header.classList.remove("header-bg");
+    });
   </script>
 </body>
 </html>
