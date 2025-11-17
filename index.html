@@ -1,197 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-emerald-950 text-emerald-50">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Shanti Loops – Village Stays in Wayanad</title>
-
-  <!-- Tailwind CDN -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shanti Loops · Wayanad Village Stays</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              dark: '#072018',
-              mid: '#0B3B2A',
-              light: '#E5F3EC',
-              accent: '#F5A623',
-            },
-          },
-          fontFamily: {
-            sans: ['Poppins', 'system-ui', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <meta name="description" content="Shanti Loops – peaceful village stays and curated getaways in Wayanad, Kerala." />
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700&display=swap" rel="stylesheet">
+  <style>
+    html, body { font-family: 'Poppins', system-ui, sans-serif; }
+  </style>
 </head>
-<body class="font-sans bg-brand-light text-slate-900">
-
-  <!-- NAVBAR -->
-  <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur shadow">
-    <nav class="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
-      <a href="#top" class="text-white font-semibold tracking-wide text-lg">
-        Shanti <span class="text-brand-accent">Loops</span>
-      </a>
-      <a
-        href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
-        target="_blank"
-        class="hidden sm:inline-flex items-center gap-2 bg-brand-accent text-brand-dark px-4 py-2 rounded-full text-sm font-semibold shadow hover:bg-amber-400 transition"
-      >
+<body class="bg-emerald-950 min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-30 bg-emerald-950/90 backdrop-blur border-b border-emerald-900 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 flex items-center justify-between h-16">
+      <span class="text-lg sm:text-2xl font-semibold tracking-wide text-orange-400">Shanti Loops</span>
+      <a href="https://wa.me/919562452792?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-400 text-white font-medium shadow hover:bg-orange-500 transition"
+        target="_blank" rel="noopener">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h4m0 0h4m-4 0v4m0-4v-4m8 4a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         Chat on WhatsApp
       </a>
-    </nav>
-  </header>
+    </div>
+  </nav>
 
-  <!-- HERO -->
-  <main id="top" class="max-w-5xl mx-auto px-4 pt-10 pb-16">
-    <section class="grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <p class="text-xs tracking-[0.25em] uppercase text-emerald-700 mb-3">Wayanad · Village · Forest · River</p>
-        <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
-          Slow down, breathe, and return to
-          <span class="text-brand-accent">Shanti</span>.
-        </h1>
-        <p class="text-sm md:text-base text-slate-700 mb-5">
-          Shanti Loops is your point of return to the Brahmagiri hills, Kalindi riverbanks, coffee plantations
-          and village life around Thirunelly &amp; Mananthavady. We connect you to peaceful homestays, village homes,
-          and long-stay retreats – with local support on WhatsApp.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a
-            href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
-            target="_blank"
-            class="inline-flex items-center justify-center gap-2 bg-brand-accent text-brand-dark px-5 py-2.5 rounded-full font-semibold text-sm shadow hover:bg-amber-400 transition"
-          >
-            Plan a stay on WhatsApp
-          </a>
-          <a
-            href="#about"
-            class="inline-flex items-center justify-center px-4 py-2.5 rounded-full border border-brand-accent text-brand-dark text-sm font-medium hover:bg-white/70 transition"
-          >
-            Know more
-          </a>
-        </div>
-        <p class="text-xs text-slate-500 mt-3">
-          Quick replies · Custom dates · Village food &amp; nature walks
-        </p>
+  <!-- Hero -->
+  <section class="relative w-full pt-12 pb-8 flex-1 flex flex-col">
+    <div class="max-w-3xl mx-auto px-4 flex flex-col items-center">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-orange-400 text-center drop-shadow-sm">Slow down & return to peace in Wayanad</h1>
+      <p class="text-emerald-100 mb-6 text-center max-w-xl text-lg">Curated village stays, forest homes, quiet riversides and coffee estate retreats beneath the Brahmagiri hills. Find your calm in Wayanad.</p>
+      <div class="flex flex-col sm:flex-row gap-4 mb-12">
+        <a href="https://wa.me/919562452792?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
+          target="_blank" rel="noopener"
+          class="px-6 py-3 rounded-full bg-orange-400 hover:bg-orange-500 text-white font-semibold shadow transition">Plan a stay on WhatsApp</a>
+        <a href="#about"
+          class="px-6 py-3 rounded-full bg-transparent border border-orange-400 text-orange-300 font-semibold shadow hover:bg-orange-950 hover:text-white transition text-center">Know more</a>
       </div>
-
-      <!-- Simple hero illustration block -->
-      <div class="relative">
-        <div class="aspect-[4/3] rounded-3xl bg-gradient-to-tr from-brand-dark via-emerald-800 to-brand-mid shadow-lg overflow-hidden flex items-center justify-center">
-          <div class="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_center,#fff_0,transparent_60%)]"></div>
-          <div class="relative px-6 py-6 text-center text-emerald-50">
-            <p class="text-xs uppercase tracking-[0.2em] mb-3 text-amber-200">Shanti Loops</p>
-            <p class="text-lg font-semibold mb-2">Village stays in the Brahmagiri foothills</p>
-            <p class="text-xs text-emerald-100/90">
-              Thirunelly · Mananthavady · Wayanad, Kerala
-            </p>
-            <div class="mt-4 flex flex-wrap justify-center gap-2 text-[11px]">
-              <span class="px-3 py-1 rounded-full bg-emerald-900/60 border border-emerald-500/50">Forest walks</span>
-              <span class="px-3 py-1 rounded-full bg-emerald-900/60 border border-emerald-500/50">Kalindi river side</span>
-              <span class="px-3 py-1 rounded-full bg-emerald-900/60 border border-emerald-500/50">Coffee &amp; paddy fields</span>
-            </div>
+      <!-- Gradient Illustration -->
+      <div class="w-full flex items-center justify-center">
+        <div class="w-64 h-32 sm:w-96 sm:h-40 rounded-2xl shadow-lg"
+          style="background: linear-gradient(135deg, #115e59 50%, #fb923c 90%);">
+          <div class="relative w-full h-full flex justify-center items-end">
+            <!-- Layered hills with Tailwind gradients -->
+            <div class="absolute bottom-0 left-0 w-full h-8 rounded-b-2xl"
+              style="background: linear-gradient(to top, #134e4a 80%, transparent 100%);"></div>
+            <div class="absolute bottom-3 left-1/3 w-32 h-5 rounded-full bg-emerald-800/80 blur-lg"></div>
+            <div class="absolute bottom-6 left-0 w-24 h-4 rounded-full bg-orange-300/30 blur-sm"></div>
+            <div class="absolute bottom-4 right-0 w-20 h-4 rounded-full bg-emerald-900/60"></div>
+            <div class="absolute bottom-1 left-1/6 w-20 h-4 rounded-full bg-orange-400/20"></div>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="mt-16 grid md:grid-cols-2 gap-8 items-start">
-      <div>
-        <h2 class="text-xl md:text-2xl font-semibold text-brand-dark mb-3">What is Shanti Loops?</h2>
-        <p class="text-sm md:text-base text-slate-700 mb-3">
-          Shanti Loops is a small, heart-led project from a village near Mananthavady. We work with local
-          homestays and village homes around Thirunelly to offer calm, honest stays – from 3-day breaks to
-          month-long digital retreats.
-        </p>
-        <p class="text-sm md:text-base text-slate-700 mb-3">
-          Instead of a big booking engine, we keep it simple: you message us on WhatsApp, tell us your dates,
-          budget and vibe. We suggest a place, help you with route guidance, food options, and local support
-          once you arrive.
-        </p>
-      </div>
-      <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-5 text-sm">
-        <h3 class="font-semibold text-brand-dark mb-3">What you can expect</h3>
-        <ul class="space-y-2 text-slate-700">
-          <li>• Traditional Kerala homes, village houses, and simple cottages</li>
-          <li>• Home-cooked food, local cafés &amp; toddy shop recommendations</li>
-          <li>• Support from local youth for rides, treks and basic needs</li>
-          <li>• Calm spaces to think, write, reset or work remotely</li>
-        </ul>
-        <p class="mt-4 text-xs text-slate-500">
-          Full website with stay listings, photos, and packages is coming soon. For now, everything happens over WhatsApp.
-        </p>
-      </div>
-    </section>
-
-    <!-- EXPERIENCES / FEATURES -->
-    <section class="mt-16">
-      <h2 class="text-xl md:text-2xl font-semibold text-brand-dark mb-4">Who is it for?</h2>
-      <div class="grid md:grid-cols-3 gap-5 text-sm">
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold text-brand-dark mb-2 text-sm">Short breaks</h3>
-          <p class="text-slate-700">
-            2–4 day trips from Bangalore, Mysore, Calicut and Kochi for people who just want quiet, nature and good food.
-          </p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold text-brand-dark mb-2 text-sm">Work &amp; think time</h3>
-          <p class="text-slate-700">
-            Stay a week or a month while you work remotely, write, design or plan your next move in life or business.
-          </p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-4">
-          <h3 class="font-semibold text-brand-dark mb-2 text-sm">Slow travelers</h3>
-          <p class="text-slate-700">
-            For people who love to live like a local – walks to the river, chai from the same shop, and familiar faces.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHATSAPP CTA -->
-    <section class="mt-16 mb-8">
-      <div class="bg-brand-dark rounded-3xl text-emerald-50 px-6 py-8 md:px-8 md:py-10 flex flex-col md:flex-row items-start md:items-center gap-6">
-        <div class="flex-1">
-          <h2 class="text-lg md:text-xl font-semibold mb-2">Start a chat, we’ll suggest a stay.</h2>
-          <p class="text-sm md:text-base text-emerald-100">
-            Share your dates, number of people and budget. We’ll reply on WhatsApp with 1–2 options and all the details you need
-            to decide – no pressure, no spam.
-          </p>
-        </div>
-        <div class="flex flex-col items-start gap-2">
-          <a
-            href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
-            target="_blank"
-            class="inline-flex items-center justify-center gap-2 bg-brand-accent text-brand-dark px-5 py-2.5 rounded-full font-semibold text-sm shadow hover:bg-amber-400 transition"
-          >
-            WhatsApp Shanti Loops
-          </a>
-          <p class="text-xs text-emerald-100/80">
-            WhatsApp only for now · English / മലയാളം
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="bg-brand-dark text-emerald-100 text-xs">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p>© <span id="year"></span> Shanti Loops · Wayanad, Kerala</p>
-      <p class="text-emerald-200/80">Website in early phase · Full listings coming soon.</p>
     </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="max-w-2xl mx-auto px-4 py-10">
+    <h2 class="text-xl md:text-2xl font-bold mb-2 text-orange-400">About Shanti Loops</h2>
+    <p class="text-emerald-100 mb-5">
+      Shanti Loops connects you to peaceful village homes, homestays and long-stay retreats—curated especially for nature-lovers and seekers of calm. Message us on WhatsApp with your plans and preferences; we’ll suggest stays and hosts you can trust.<br><br>
+      All locations are near the Brahmagiri hills, Kalindi river, coffee plantations, and lush paddy fields of Wayanad.
+    </p>
+  </section>
+
+  <!-- Who is it for? -->
+  <section class="max-w-3xl mx-auto px-4 py-8">
+    <h2 class="text-xl md:text-2xl font-bold mb-6 text-orange-400 text-center">Who is it for?</h2>
+    <div class="grid sm:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-emerald-900/70 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-xl transition duration-200">
+        <span class="mb-2 text-orange-300 font-bold text-lg">Short breaks</span>
+        <p class="text-emerald-100 text-center">Weekend escapes or short getaways to recharge amidst nature.</p>
+      </div>
+      <!-- Card 2 -->
+      <div class="bg-emerald-900/70 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-xl transition duration-200">
+        <span class="mb-2 text-orange-300 font-bold text-lg">Work & think time</span>
+        <p class="text-emerald-100 text-center">Remote work, writing retreats, digital nomads, and long stays to focus & create.</p>
+      </div>
+      <!-- Card 3 -->
+      <div class="bg-emerald-900/70 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-xl transition duration-200">
+        <span class="mb-2 text-orange-300 font-bold text-lg">Slow travelers</span>
+        <p class="text-emerald-100 text-center">Those who prefer immersive, slow journeys deep in local culture & nature.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp CTA strip -->
+  <section class="w-full bg-emerald-900 py-8 mt-8 shadow-inner">
+    <div class="max-w-3xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex-1">
+        <span class="block text-orange-400 font-semibold mb-2 text-lg">Let us curate your stay.</span>
+        <p class="text-emerald-100">Share your travel dates, number of people, and budget—<br class="hidden sm:inline">we’ll suggest 1–2 beautiful, peaceful stays via WhatsApp.</p>
+      </div>
+      <a href="https://wa.me/919562452792?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
+        target="_blank" rel="noopener"
+        class="flex items-center gap-2 mt-4 sm:mt-0 px-6 py-3 rounded-full bg-orange-400 text-white font-semibold shadow hover:bg-orange-500 transition whitespace-nowrap">
+        WhatsApp Shanti Loops
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-auto bg-emerald-950 border-t border-emerald-900 py-6 text-center">
+    <span class="block text-emerald-100 text-sm mb-2">
+      © <span id="year"></span> Shanti Loops · Wayanad, Kerala
+    </span>
+    <span class="block text-emerald-400 text-xs">Website in early phase · Full listings coming soon.</span>
   </footer>
 
+  <!-- Inline JS for dynamic year -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
