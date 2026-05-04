@@ -1,318 +1,989 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#052016] text-[#E7F4EC]">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shanti Loops · Wayanad Village Stays</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shanthi Loops - Slow Travel in Wayanad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
   <style>
-    html, body { font-family: 'Poppins', system-ui, sans-serif; }
-    /* Hide scrollbars in carousel for aesthetics */
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    /* Fade-in animation for sections */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(.5,.2,.1,1), transform 0.8s cubic-bezier(.5,.2,.1,1);
+    /* ============================================
+       RESET & GLOBAL STYLES
+       ============================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
+
+    html {
+      scroll-behavior: smooth;
     }
-    /* Header blur */
-    .header-bg {
-      background: rgba(5, 32, 22, 0.98);
-      backdrop-filter: blur(8px) saturate(1.3);
-      border-bottom: 1px solid #0B3B2A;
-      box-shadow: 0 2px 12px rgba(11, 59, 42, 0.06);
-      transition: background 0.3s;
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #0B4050;
+      background-color: #FEFADF;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    /* Simple fade/slide for carousel */
-    .slide {
-      position: absolute;
-      width: 100%;
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.3s ease;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    /* ============================================
+       NAVBAR
+       ============================================ */
+    nav {
+      position: fixed;
       top: 0;
       left: 0;
-      opacity: 0;
-      transform: translateX(32px);
-      transition: opacity 0.7s, transform 0.7s;
-      pointer-events: none;
+      right: 0;
+      z-index: 1000;
+      padding: 1.5rem 2rem;
+      background: rgba(11, 64, 80, 0);
+      transition: all 0.4s ease;
+      border-bottom: 1px solid rgba(255, 250, 223, 0);
     }
-    .slide.active {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: auto;
+
+    nav.scrolled {
+      background: rgba(11, 64, 80, 0.95);
+      border-bottom: 1px solid rgba(255, 250, 223, 0.1);
+      backdrop-filter: blur(8px);
     }
-    /* Slide dots */
-    .carousel-dot {
+
+    .navbar-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FEFADF;
+      letter-spacing: 2px;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      color: #FEFADF;
+      font-size: 0.95rem;
+      font-weight: 500;
+      opacity: 0.9;
+      position: relative;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #4E180C;
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    .btn-cta-nav {
+      background: #4E180C;
+      color: #FEFADF;
+      padding: 0.6rem 1.5rem;
+      border-radius: 2px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .btn-cta-nav:hover {
+      background: #6B2511;
+      transform: translateY(-2px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
       cursor: pointer;
-      transition: background 0.3s, box-shadow 0.3s;
-      border: none;
-      outline: none;
     }
-    .carousel-dot.active {
-      background: #F6A823;
-      box-shadow: 0 0 0 2px #F6A82344;
+
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: #FEFADF;
+      transition: 0.3s ease;
+    }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(rgba(11, 64, 80, 0.6), rgba(11, 64, 80, 0.6)), 
+                  url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop') center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #FEFADF;
+      padding: 2rem;
+      position: relative;
+      margin-top: 60px;
+    }
+
+    .hero-location {
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #FEFADF;
+      line-height: 1.3;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      color: #FEFADF;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn-primary {
+      background: #4E180C;
+      color: #FEFADF;
+      padding: 0.8rem 2rem;
+      border-radius: 2px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary:hover {
+      background: #6B2511;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #FEFADF;
+      padding: 0.8rem 2rem;
+      border: 2px solid #FEFADF;
+      border-radius: 2px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .btn-secondary:hover {
+      background: #FEFADF;
+      color: #0B4050;
+    }
+
+    /* ============================================
+       MANIFESTO STRIP
+       ============================================ */
+    .manifesto {
+      background: #0B4050;
+      color: #FEFADF;
+      padding: 5rem 2rem;
+    }
+
+    .manifesto-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      text-align: center;
+    }
+
+    .manifesto-item h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.8rem;
+      font-style: italic;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: #4E180C;
+    }
+
+    .manifesto-item p {
+      font-size: 1rem;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    /* ============================================
+       LOOPS SECTION
+       ============================================ */
+    .loops {
+      background: #FEFADF;
+      padding: 5rem 2rem;
+    }
+
+    .loops-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      text-align: center;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      margin-bottom: 4rem;
+      color: #0B4050;
+    }
+
+    .loops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .loop-card {
+      background: #fff;
+      border-radius: 2px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 2px 8px rgba(11, 64, 80, 0.1);
+    }
+
+    .loop-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(11, 64, 80, 0.15);
+    }
+
+    .loop-card-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .loop-card:hover .loop-card-image {
+      transform: scale(1.02);
+    }
+
+    .loop-card-content {
+      padding: 2rem;
+    }
+
+    .loop-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #0B4050;
+    }
+
+    .loop-card-meta {
+      font-size: 0.9rem;
+      color: #3F5F4A;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .loop-card-desc {
+      font-size: 0.95rem;
+      color: #0B4050;
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       EXPERIENCES SECTION
+       ============================================ */
+    .experiences {
+      background: #0B4050;
+      color: #FEFADF;
+      padding: 5rem 2rem;
+    }
+
+    .experiences-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .experiences-heading {
+      text-align: center;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      margin-bottom: 4rem;
+      color: #FEFADF;
+    }
+
+    .experiences-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .experience-item {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 250, 223, 0.05);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .experience-item:hover {
+      background: rgba(255, 250, 223, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .experience-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .experience-item h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .experience-item p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    /* ============================================
+       PACKAGES SECTION
+       ============================================ */
+    .packages {
+      background: #FEFADF;
+      padding: 5rem 2rem;
+    }
+
+    .packages-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .packages-heading {
+      text-align: center;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      margin-bottom: 1rem;
+      color: #0B4050;
+    }
+
+    .packages-intro {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 4rem;
+      font-size: 1rem;
+      color: #0B4050;
+      opacity: 0.85;
+      line-height: 1.8;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .package-card {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 2px;
+      box-shadow: 0 2px 8px rgba(11, 64, 80, 0.1);
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .package-card.featured {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(11, 64, 80, 0.2);
+      border: 2px solid #4E180C;
+    }
+
+    .package-card:not(.featured):hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(11, 64, 80, 0.15);
+    }
+
+    .package-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #0B4050;
+    }
+
+    .package-price {
+      font-size: 1.8rem;
+      color: #4E180C;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .package-price span {
+      font-size: 0.9rem;
+      color: #0B4050;
+      opacity: 0.7;
+    }
+
+    .package-card p {
+      font-size: 0.9rem;
+      color: #0B4050;
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .package-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4E180C;
+      color: #FEFADF;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ============================================
+       GALLERY SECTION
+       ============================================ */
+    .gallery {
+      background: #0B4050;
+      padding: 5rem 2rem;
+    }
+
+    .gallery-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* ============================================
+       CTA SECTION
+       ============================================ */
+    .cta {
+      background: #3F5F4A;
+      color: #FEFADF;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1.5rem;
+      color: #FEFADF;
+    }
+
+    .cta-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      opacity: 0.95;
+    }
+
+    .btn-cta-whatsapp {
+      background: #25D366;
+      color: #fff;
+      padding: 0.9rem 2.5rem;
+      border-radius: 2px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .btn-cta-whatsapp:hover {
+      background: #1ea952;
+      transform: translateY(-3px);
+    }
+
+    /* ============================================
+       FLOATING WHATSAPP BUTTON
+       ============================================ */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      z-index: 999;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      background: #061435;
+      color: #FEFADF;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-location {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-contact {
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 250, 223, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: #4E180C;
+      transform: translateY(-3px);
+    }
+
+    .footer-credit {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 250, 223, 0.1);
+    }
+
+    /* ============================================
+       RESPONSIVE DESIGN
+       ============================================ */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .nav-menu.active {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(11, 64, 80, 0.95);
+        flex-direction: column;
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+        display: flex;
+      }
+
+      .package-card.featured {
+        transform: scale(1);
+      }
+
+      .manifesto-container {
+        gap: 2rem;
+      }
+
+      .hero {
+        padding: 1rem;
+      }
+
+      .floating-whatsapp {
+        width: 50px;
+        height: 50px;
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-menu.active {
+        gap: 1rem;
+        padding: 1.5rem 1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .section-heading {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
-<body class="bg-[#052016] min-h-screen flex flex-col">
+<body>
 
-  <!-- Header / Navbar -->
-  <header id="mainHeader" class="fixed top-0 left-0 w-full z-40 header-bg text-[#E7F4EC]">
-    <nav class="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-      <!-- Logo -->
-      <a href="#" class="text-xl sm:text-2xl font-bold tracking-wide text-[#F6A823] select-none">Shanti Loops</a>
-      <!-- Links: Hidden on mobile, show on md+ screens -->
-      <ul class="hidden md:flex gap-6 flex-1 justify-center text-[#E7F4EC] font-medium">
-        <li><a href="#about" class="hover:text-[#F6A823] transition">About</a></li>
-        <li><a href="#stays" class="hover:text-[#F6A823] transition">Stays</a></li>
-        <li><a href="#experiences" class="hover:text-[#F6A823] transition">Experiences</a></li>
-        <li><a href="#howitworks" class="hover:text-[#F6A823] transition">How it works</a></li>
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="navbar-container">
+      <div class="logo">Shanthi Loops</div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#loops">Loops</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#cta">Thirunelly</a></li>
+        <li><a href="#cta" class="btn-cta-nav">Plan your loop</a></li>
       </ul>
-      <!-- WhatsApp button -->
-      <a href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
-        class="ml-2 px-5 py-2 rounded-full bg-[#F6A823] text-[#052016] font-semibold shadow-lg hover:bg-[#e09112] transition"
-        target="_blank" rel="noopener">
-        WhatsApp us
-      </a>
-    </nav>
-  </header>
-  <div class="pt-16"></div>
-
-  <!-- Hero Section -->
-  <section class="max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-16 fade-in" id="hero">
-    <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
-      <!-- Left: Headline and buttons -->
-      <div class="flex-1">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-[#F6A823] drop-shadow-sm">
-          Slow down. Return to Shanti.<br><span class="text-[#E7F4EC]">Stay gently in Wayanad.</span>
-        </h1>
-        <p class="text-[#E7F4EC]/80 mb-5 text-lg max-w-xl">
-          Curated village homes and homestays surrounded by forest, coffee estates, paddy fields and streams. Experience slow living near the Brahmagiri hills, Kalindi river and quiet corners of Wayanad.
-        </p>
-        <div class="flex gap-4 flex-col sm:flex-row mb-6">
-          <a href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
-            target="_blank"
-            class="px-6 py-3 rounded-full bg-[#F6A823] hover:bg-[#e09112] text-[#052016] font-semibold shadow-md transition text-center"
-            >Plan a stay on WhatsApp</a>
-          <a href="#about"
-            class="px-6 py-3 rounded-full bg-[#0B3B2A] hover:bg-[#052016] text-[#E7F4EC] font-semibold shadow transition text-center border border-[#F6A823]"
-            >Know more</a>
-        </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      <!-- Right: Carousel -->
-      <div class="flex-1 w-full max-w-md md:max-w-[370px] relative min-h-[230px] md:min-h-[260px] flex items-center">
-        <div class="relative w-full h-[210px] sm:h-[230px] md:h-[260px] rounded-3xl shadow-xl overflow-hidden bg-gradient-to-tr from-[#0B3B2A] via-[#052016] to-[#F6A823]/20 flex items-center justify-center">
-          <!-- Slides -->
-          <div id="carouselSlides" class="w-full h-full relative">
-            <div class="slide active flex flex-col items-center justify-center w-full h-full p-8 text-center">
-              <span class="text-lg sm:text-xl font-bold text-[#F6A823]">Village homestays near Brahmagiri hills</span>
-              <div class="h-8"></div>
-              <div class="w-32 h-3 rounded-full bg-gradient-to-r from-[#E7F4EC]/40 via-[#F6A823]/40 to-[#0B3B2A]/50 blur-md mx-auto"></div>
-            </div>
-            <div class="slide flex flex-col items-center justify-center w-full h-full p-8 text-center">
-              <span class="text-lg sm:text-xl font-bold text-[#F6A823]">Walks to the Kalindi river & paddy fields</span>
-              <div class="h-8"></div>
-              <div class="w-32 h-3 rounded-full bg-gradient-to-r from-[#0B3B2A]/30 via-[#F6A823]/40 to-[#E7F4EC]/60 blur-md mx-auto"></div>
-            </div>
-            <div class="slide flex flex-col items-center justify-center w-full h-full p-8 text-center">
-              <span class="text-lg sm:text-xl font-bold text-[#F6A823]">Stay a week or a month – slow long stays</span>
-              <div class="h-8"></div>
-              <div class="w-32 h-3 rounded-full bg-gradient-to-r from-[#F6A823]/30 via-[#E7F4EC]/50 to-[#0B3B2A]/50 blur-md mx-auto"></div>
-            </div>
-          </div>
-          <!-- Dots -->
-          <div id="carouselDots" class="absolute bottom-5 left-0 right-0 mx-auto flex gap-2 justify-center">
-            <button class="carousel-dot w-4 h-4 rounded-full bg-[#E7F4EC]/40 border-[#F6A823]"></button>
-            <button class="carousel-dot w-4 h-4 rounded-full bg-[#E7F4EC]/40 border-[#F6A823]"></button>
-            <button class="carousel-dot w-4 h-4 rounded-full bg-[#E7F4EC]/40 border-[#F6A823]"></button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-location">Thirunelly · Wayanad · Kerala</div>
+    <h1>You will come for the spots.<br>You will stay for the people.</h1>
+    <p class="hero-subtitle">Shanthi Loops maps forest trails, river ghats, and village life into walkable circuits. The discovery inside is yours.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior: 'smooth'})">Design my loop</button>
+      <button class="btn-secondary" onclick="document.getElementById('loops').scrollIntoView({behavior: 'smooth'})">See the loops</button>
+    </div>
+  </section>
+
+  <!-- MANIFESTO STRIP -->
+  <section class="manifesto">
+    <div class="manifesto-container">
+      <div class="manifesto-item">
+        <h3>Shanthi</h3>
+        <p>Peace. The quality of a morning before anyone arrives.</p>
+      </div>
+      <div class="manifesto-item">
+        <h3>Loop</h3>
+        <p>A loop is not a tour. It returns you to your origin, changed.</p>
+      </div>
+      <div class="manifesto-item">
+        <h3>Return</h3>
+        <p>Come back to yourself.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOPS SECTION -->
+  <section class="loops" id="loops">
+    <div class="loops-container">
+      <h2 class="section-heading">Three circuits. One map. Yours to walk.</h2>
+      <div class="loops-grid">
+        <div class="loop-card">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Temple Loop" class="loop-card-image">
+          <div class="loop-card-content">
+            <h3>Temple Loop</h3>
+            <p class="loop-card-meta">3–5 km · Half day</p>
+            <p class="loop-card-desc">Temple → river → village</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section class="max-w-5xl mx-auto px-4 sm:px-8 py-10 fade-in" id="about">
-    <div class="flex flex-col md:flex-row gap-8 items-center">
-      <!-- Left: Description -->
-      <div class="flex-1">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-[#F6A823]">What is Shanti Loops?</h2>
-        <p class="text-[#E7F4EC]/90 mb-5 text-lg leading-relaxed">
-          Shanti Loops is a heart-led curation project. We don’t use portals, booking engines or listings. Each stay is suggested personally over WhatsApp – for travelers, remote workers and slow seekers. You tell us when, your kind of place, your vibe; we connect you with trusted homes set in nature. Each host shares local tips, food and route guidance. If you’re seeking calm, village routines, or just a pause, we’re here for you.
-        </p>
-        <p class="text-[#E7F4EC]/70 text-md">
-          Contact is always 1:1 over WhatsApp, in English or Malayalam. Discover a softer way to stay.
-        </p>
-      </div>
-      <!-- Right: Area Cards -->
-      <div class="flex-1 flex flex-col gap-4">
-        <div class="bg-[#0B3B2A]/80 rounded-2xl p-5 shadow-md">
-          <span class="font-bold text-[#F6A823]">Where the stays are:</span>
-          <ul class="mt-2 ml-2 text-[#E7F4EC]/90 list-disc text-base marker:text-[#F6A823]/80">
-            <li>Thirunelly village & Brahmagiri foothills</li>
-            <li>Kalindi river side homes</li>
-            <li>Paddy field and coffee estate cottages</li>
-            <li>Quiet edges near Mananthavady</li>
-          </ul>
+        <div class="loop-card">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop" alt="Forest Edge Loop" class="loop-card-image">
+          <div class="loop-card-content">
+            <h3>Forest Edge Loop</h3>
+            <p class="loop-card-meta">8–12 km · Full day</p>
+            <p class="loop-card-desc">Wildlife, Brahmagiri, guided</p>
+          </div>
+        </div>
+        <div class="loop-card">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Culture Loop" class="loop-card-image">
+          <div class="loop-card-content">
+            <h3>Culture Loop</h3>
+            <p class="loop-card-meta">Half day</p>
+            <p class="loop-card-desc">Farms, artisans, village</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Stays: Who is it for? Section -->
-  <section class="max-w-6xl mx-auto px-4 sm:px-8 py-10 fade-in" id="stays">
-    <h2 class="text-2xl sm:text-3xl font-bold text-[#F6A823] mb-6 text-center">Who is it for?</h2>
-    <div class="grid sm:grid-cols-3 gap-6">
-      <!-- Card 1 -->
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition duration-200">
-        <span class="mb-2 text-[#F6A823] font-semibold text-lg">Short breaks <span class="text-[#E7F4EC]/50 text-base font-normal">(2–4 days)</span></span>
-        <p class="text-[#E7F4EC]/90 mb-2">For city folks (Bangalore, Mysore, Calicut, Kochi, Kannur) seeking recharge in green, village life and forest edges.</p>
-        <span class="text-[#E7F4EC]/50 text-sm">Quick weekends in real homes</span>
-      </div>
-      <!-- Card 2 -->
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition duration-200">
-        <span class="mb-2 text-[#F6A823] font-semibold text-lg">Work & think time <span class="text-[#E7F4EC]/50 text-base font-normal">(1–4 weeks)</span></span>
-        <p class="text-[#E7F4EC]/90 mb-2">For remote workers, writers, planners, people between places—quiet, strong WiFi, life in a village.</p>
-        <span class="text-[#E7F4EC]/50 text-sm">Unwind, focus, create</span>
-      </div>
-      <!-- Card 3 -->
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-lg p-6 flex flex-col items-start hover:shadow-xl transition duration-200">
-        <span class="mb-2 text-[#F6A823] font-semibold text-lg">Slow travelers <span class="text-[#E7F4EC]/50 text-base font-normal">(like a villager)</span></span>
-        <p class="text-[#E7F4EC]/90 mb-2">For those who love slow routines, living many days in one place. Local immersion in Kerala’s highland villages.</p>
-        <span class="text-[#E7F4EC]/50 text-sm">Stay, eat, shop like a local</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experiences Section -->
-  <section class="max-w-5xl mx-auto px-4 sm:px-8 py-10 fade-in" id="experiences">
-    <h2 class="text-2xl sm:text-3xl font-bold text-[#F6A823] mb-6 text-center">Experiences</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-5">
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-4 flex flex-col items-center">
-        <span class="text-3xl mb-2">🌲</span>
-        <span class="font-semibold text-[#F6A823] mb-1">Forest & hill walks</span>
-        <span class="text-sm text-[#E7F4EC]/80 text-center">Brahmagiri trails, local paths</span>
-      </div>
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-4 flex flex-col items-center">
-        <span class="text-3xl mb-2">🌊</span>
-        <span class="font-semibold text-[#F6A823] mb-1">River / stream sides</span>
-        <span class="text-sm text-[#E7F4EC]/80 text-center">Kalindi & village streams</span>
-      </div>
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-4 flex flex-col items-center">
-        <span class="text-3xl mb-2">🍵</span>
-        <span class="font-semibold text-[#F6A823] mb-1">Home food & tea shops</span>
-        <span class="text-sm text-[#E7F4EC]/80 text-center">Kerala kitchen & tiny stalls</span>
-      </div>
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-4 flex flex-col items-center">
-        <span class="text-3xl mb-2">📓</span>
-        <span class="font-semibold text-[#F6A823] mb-1">Quiet work & journaling</span>
-        <span class="text-sm text-[#E7F4EC]/80 text-center">Wifi, green corners, slow time</span>
+  <!-- EXPERIENCES SECTION -->
+  <section class="experiences" id="experiences">
+    <div class="experiences-container">
+      <h2 class="experiences-heading">What you'll experience</h2>
+      <div class="experiences-grid">
+        <div class="experience-item">
+          <div class="experience-icon">🌲</div>
+          <h4>Forest Walks</h4>
+          <p>Guided trails through pristine wilderness</p>
+        </div>
+        <div class="experience-item">
+          <div class="experience-icon">🏘️</div>
+          <h4>Village Life</h4>
+          <p>Authentic encounters with local communities</p>
+        </div>
+        <div class="experience-item">
+          <div class="experience-icon">🎨</div>
+          <h4>Cultural Experiences</h4>
+          <p>Learn traditional crafts and stories</p>
+        </div>
+        <div class="experience-item">
+          <div class="experience-icon">🍜</div>
+          <h4>Local Food</h4>
+          <p>Farm-to-table culinary journeys</p>
+        </div>
+        <div class="experience-item">
+          <div class="experience-icon">💧</div>
+          <h4>River Visits</h4>
+          <p>Connect with sacred and natural waters</p>
+        </div>
+        <div class="experience-item">
+          <div class="experience-icon">📸</div>
+          <h4>Slow Moments</h4>
+          <p>Time to breathe, reflect, and be present</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- How it works Section -->
-  <section class="max-w-4xl mx-auto px-4 sm:px-8 py-10 fade-in" id="howitworks">
-    <h2 class="text-2xl sm:text-3xl font-bold text-[#F6A823] mb-6 text-center">How it works</h2>
-    <div class="grid md:grid-cols-3 gap-7">
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-6 flex flex-col items-start">
-        <span class="font-bold text-xl text-[#F6A823] mb-2">1 · Start a WhatsApp chat</span>
-        <p class="text-[#E7F4EC]/85 mb-2 pl-1">Send dates, number of people, budget and your preferred stay vibe.</p>
-      </div>
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-6 flex flex-col items-start">
-        <span class="font-bold text-xl text-[#F6A823] mb-2">2 · We suggest curated stays</span>
-        <p class="text-[#E7F4EC]/85 mb-2 pl-1">You’ll get 1–2 options with photos, pricing, and local advice within hours.</p>
-      </div>
-      <div class="bg-[#0B3B2A]/80 rounded-2xl shadow-md p-6 flex flex-col items-start">
-        <span class="font-bold text-xl text-[#F6A823] mb-2">3 · Decide & settle in</span>
-        <p class="text-[#E7F4EC]/85 mb-2 pl-1">You choose. We help with route guidance, WhatsApp, local support, and village contacts.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- WhatsApp CTA strip -->
-  <section class="max-w-4xl mx-auto px-4 sm:px-8 py-7 fade-in">
-    <div class="bg-[#0B3B2A] rounded-3xl shadow-lg p-7 flex flex-col sm:flex-row items-center gap-6">
-      <div class="flex-1">
-        <h3 class="text-xl sm:text-2xl font-bold text-[#F6A823] mb-2">Ready to loop back to Shanti?</h3>
-        <p class="text-[#E7F4EC]/90 mb-2">Message us – share your possible dates, how many people, budget, and any wishes. We’ll suggest stays personally.</p>
-        <span class="text-xs text-[#E7F4EC]/70">WhatsApp only for now · English / മലയാളം</span>
-      </div>
-      <div>
-        <a href="https://wa.me/919562614314?text=Hi%20Shanti%20Loops,%20I%20want%20to%20plan%20a%20stay%20in%20Wayanad."
-          target="_blank"
-          class="px-7 py-3 rounded-full bg-[#F6A823] hover:bg-[#e09112] text-[#052016] font-semibold shadow-md transition text-center"
-          >WhatsApp Shanti Loops</a>
+  <!-- PACKAGES SECTION -->
+  <section class="packages" id="packages">
+    <div class="packages-container">
+      <h2 class="packages-heading">Packages & pricing</h2>
+      <p class="packages-intro">Tell us your budget and your days. We design the loop to fit.</p>
+      <div class="packages-grid">
+        <div class="package-card">
+          <div>
+            <h3>Backpacker Loop</h3>
+            <div class="package-price">From ₹799<span>/night</span></div>
+            <p>For the traveler seeking authentic experiences without the frills. Shared stays, local meals, guided walks.</p>
+          </div>
+        </div>
+        <div class="package-card featured">
+          <div class="package-badge">Most Popular</div>
+          <div>
+            <h3>Together Loop</h3>
+            <div class="package-price">From ₹2200<span>/night</span></div>
+            <p>Crafted for small groups and families. Private guides, curated stays, meals with locals, unforgettable memories.</p>
+          </div>
+        </div>
+        <div class="package-card">
+          <div>
+            <h3>Creator Loop</h3>
+            <div class="package-price">From ₹1800<span>/night</span></div>
+            <p>For photographers, writers, and artists. Photography locations, quiet spaces, creative workshops, deep dives.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="mt-auto bg-[#052016] border-t border-[#0B3B2A]/60 py-6 text-center">
-    <span class="block text-[#E7F4EC]/90 text-sm mb-2">
-      © <span id="year"></span> Shanti Loops · Wayanad, Kerala
-    </span>
-    <span class="block text-[#E7F4EC]/70 text-xs">
-      Website in early phase · Full listings and photos coming soon.
-    </span>
+  <!-- GALLERY SECTION -->
+  <section class="gallery">
+    <div class="gallery-container">
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop" alt="Forest nature">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop" alt="Mountain view">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop" alt="Forest landscape">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop" alt="Valley views">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop" alt="Nature trails">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop" alt="Village scenery">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta" id="cta">
+    <div class="cta-container">
+      <h2>Plan your loop</h2>
+      <p class="cta-text">Tell us your dates, budget, and travel style. We design it for you.</p>
+      <a href="https://wa.me/919876543210" class="btn-cta-whatsapp">WhatsApp Now</a>
+    </div>
+  </section>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/919876543210" class="floating-whatsapp" title="Contact us on WhatsApp">
+    💬
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">Shanthi Loops</div>
+      <p class="footer-location">Thirunelly, Wayanad, Kerala · India</p>
+      <p class="footer-contact"><a href="https://wa.me/919876543210" style="color: #FEFADF;">WhatsApp: +91 98765 43210</a></p>
+      <div class="footer-social">
+        <a href="https://instagram.com/shanthiloops" class="social-link" title="Follow on Instagram">📷</a>
+        <a href="https://facebook.com/shanthiloops" class="social-link" title="Like on Facebook">f</a>
+      </div>
+      <p class="footer-credit">© 2026 Shanthi Loops. Crafted for slow travelers.</p>
+    </div>
   </footer>
 
-  <!-- Minimal JS: Carousel, fade-ins, year -->
+  <!-- SCRIPTS -->
   <script>
-    // Carousel logic
-    const slides = Array.from(document.querySelectorAll("#carouselSlides .slide"));
-    const dots = Array.from(document.querySelectorAll("#carouselDots .carousel-dot"));
-    let current = 0;
-    let carouselTimer = null;
-
-    function showSlide(idx) {
-      slides.forEach((slide, i) => slide.classList.toggle("active", i === idx));
-      dots.forEach((dot, i) => dot.classList.toggle("active", i === idx));
-      current = idx;
-    }
-    function nextSlide() {
-      showSlide((current+1)%slides.length);
-    }
-    function restartCarouselTimer() {
-      clearTimeout(carouselTimer);
-      carouselTimer = setTimeout(() => {
-        nextSlide();
-        restartCarouselTimer();
-      }, 6000);
-    }
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => { showSlide(i); restartCarouselTimer(); });
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
     });
-    showSlide(0); restartCarouselTimer();
 
-    // IntersectionObserver for fade-in sections
-    const observer = new window.IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    document.querySelectorAll(".fade-in").forEach(el => { observer.observe(el); });
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
 
-    // Dynamic year in footer
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Close menu when link is clicked
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
 
-    // Header blur, dark bg on scroll
-    const header = document.getElementById("mainHeader");
-    window.addEventListener("scroll", () => {
-      if(window.scrollY > 8) header.classList.add("header-bg");
-      else header.classList.remove("header-bg");
+    // Smooth scroll for hash links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
   </script>
+
 </body>
 </html>
