@@ -1,989 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shanthi Loops - Slow Travel in Wayanad</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <style>
-    /* ============================================
-       RESET & GLOBAL STYLES
-       ============================================ */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: #0B4050;
-      background-color: #FEFADF;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-      transition: opacity 0.3s ease;
-    }
-
-    button {
-      cursor: pointer;
-      border: none;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.3s ease;
-    }
-
-    /* ============================================
-       NAVBAR
-       ============================================ */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 1.5rem 2rem;
-      background: rgba(11, 64, 80, 0);
-      transition: all 0.4s ease;
-      border-bottom: 1px solid rgba(255, 250, 223, 0);
-    }
-
-    nav.scrolled {
-      background: rgba(11, 64, 80, 0.95);
-      border-bottom: 1px solid rgba(255, 250, 223, 0.1);
-      backdrop-filter: blur(8px);
-    }
-
-    .navbar-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #FEFADF;
-      letter-spacing: 2px;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 3rem;
-      align-items: center;
-      list-style: none;
-    }
-
-    .nav-menu a {
-      color: #FEFADF;
-      font-size: 0.95rem;
-      font-weight: 500;
-      opacity: 0.9;
-      position: relative;
-    }
-
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #4E180C;
-      transition: width 0.3s ease;
-    }
-
-    .nav-menu a:hover::after {
-      width: 100%;
-    }
-
-    .btn-cta-nav {
-      background: #4E180C;
-      color: #FEFADF;
-      padding: 0.6rem 1.5rem;
-      border-radius: 2px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    .btn-cta-nav:hover {
-      background: #6B2511;
-      transform: translateY(-2px);
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    .hamburger span {
-      width: 25px;
-      height: 2px;
-      background: #FEFADF;
-      transition: 0.3s ease;
-    }
-
-    /* ============================================
-       HERO SECTION
-       ============================================ */
-    .hero {
-      min-height: 100vh;
-      background: linear-gradient(rgba(11, 64, 80, 0.6), rgba(11, 64, 80, 0.6)), 
-                  url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&h=900&fit=crop') center/cover;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #FEFADF;
-      padding: 2rem;
-      position: relative;
-      margin-top: 60px;
-    }
-
-    .hero-location {
-      font-size: 0.9rem;
-      letter-spacing: 3px;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      color: #FEFADF;
-      line-height: 1.3;
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1rem, 3vw, 1.3rem);
-      max-width: 600px;
-      margin: 0 auto 3rem;
-      color: #FEFADF;
-      font-weight: 300;
-      line-height: 1.8;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    .btn-primary {
-      background: #4E180C;
-      color: #FEFADF;
-      padding: 0.8rem 2rem;
-      border-radius: 2px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    .btn-primary:hover {
-      background: #6B2511;
-      transform: translateY(-3px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: #FEFADF;
-      padding: 0.8rem 2rem;
-      border: 2px solid #FEFADF;
-      border-radius: 2px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    .btn-secondary:hover {
-      background: #FEFADF;
-      color: #0B4050;
-    }
-
-    /* ============================================
-       MANIFESTO STRIP
-       ============================================ */
-    .manifesto {
-      background: #0B4050;
-      color: #FEFADF;
-      padding: 5rem 2rem;
-    }
-
-    .manifesto-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 3rem;
-      text-align: center;
-    }
-
-    .manifesto-item h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.8rem;
-      font-style: italic;
-      font-weight: 400;
-      margin-bottom: 1rem;
-      color: #4E180C;
-    }
-
-    .manifesto-item p {
-      font-size: 1rem;
-      line-height: 1.8;
-      opacity: 0.95;
-    }
-
-    /* ============================================
-       LOOPS SECTION
-       ============================================ */
-    .loops {
-      background: #FEFADF;
-      padding: 5rem 2rem;
-    }
-
-    .loops-container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .section-heading {
-      text-align: center;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      margin-bottom: 4rem;
-      color: #0B4050;
-    }
-
-    .loops-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .loop-card {
-      background: #fff;
-      border-radius: 2px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      box-shadow: 0 2px 8px rgba(11, 64, 80, 0.1);
-    }
-
-    .loop-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(11, 64, 80, 0.15);
-    }
-
-    .loop-card-image {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .loop-card:hover .loop-card-image {
-      transform: scale(1.02);
-    }
-
-    .loop-card-content {
-      padding: 2rem;
-    }
-
-    .loop-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-      color: #0B4050;
-    }
-
-    .loop-card-meta {
-      font-size: 0.9rem;
-      color: #3F5F4A;
-      margin-bottom: 1rem;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .loop-card-desc {
-      font-size: 0.95rem;
-      color: #0B4050;
-      opacity: 0.8;
-      line-height: 1.6;
-    }
-
-    /* ============================================
-       EXPERIENCES SECTION
-       ============================================ */
-    .experiences {
-      background: #0B4050;
-      color: #FEFADF;
-      padding: 5rem 2rem;
-    }
-
-    .experiences-container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .experiences-heading {
-      text-align: center;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      margin-bottom: 4rem;
-      color: #FEFADF;
-    }
-
-    .experiences-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-    }
-
-    .experience-item {
-      text-align: center;
-      padding: 2rem;
-      background: rgba(255, 250, 223, 0.05);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .experience-item:hover {
-      background: rgba(255, 250, 223, 0.1);
-      transform: translateY(-3px);
-    }
-
-    .experience-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .experience-item h4 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .experience-item p {
-      font-size: 0.9rem;
-      opacity: 0.85;
-    }
-
-    /* ============================================
-       PACKAGES SECTION
-       ============================================ */
-    .packages {
-      background: #FEFADF;
-      padding: 5rem 2rem;
-    }
-
-    .packages-container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .packages-heading {
-      text-align: center;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      margin-bottom: 1rem;
-      color: #0B4050;
-    }
-
-    .packages-intro {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 4rem;
-      font-size: 1rem;
-      color: #0B4050;
-      opacity: 0.85;
-      line-height: 1.8;
-    }
-
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      align-items: stretch;
-    }
-
-    .package-card {
-      background: #fff;
-      padding: 2.5rem;
-      border-radius: 2px;
-      box-shadow: 0 2px 8px rgba(11, 64, 80, 0.1);
-      transition: all 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-    }
-
-    .package-card.featured {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(11, 64, 80, 0.2);
-      border: 2px solid #4E180C;
-    }
-
-    .package-card:not(.featured):hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(11, 64, 80, 0.15);
-    }
-
-    .package-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: #0B4050;
-    }
-
-    .package-price {
-      font-size: 1.8rem;
-      color: #4E180C;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-
-    .package-price span {
-      font-size: 0.9rem;
-      color: #0B4050;
-      opacity: 0.7;
-    }
-
-    .package-card p {
-      font-size: 0.9rem;
-      color: #0B4050;
-      opacity: 0.8;
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
-    }
-
-    .package-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #4E180C;
-      color: #FEFADF;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    /* ============================================
-       GALLERY SECTION
-       ============================================ */
-    .gallery {
-      background: #0B4050;
-      padding: 5rem 2rem;
-    }
-
-    .gallery-container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .gallery-item {
-      position: relative;
-      height: 300px;
-      overflow: hidden;
-      border-radius: 2px;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-
-    /* ============================================
-       CTA SECTION
-       ============================================ */
-    .cta {
-      background: #3F5F4A;
-      color: #FEFADF;
-      padding: 5rem 2rem;
-      text-align: center;
-    }
-
-    .cta-container {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .cta h2 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin-bottom: 1.5rem;
-      color: #FEFADF;
-    }
-
-    .cta-text {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-      opacity: 0.95;
-    }
-
-    .btn-cta-whatsapp {
-      background: #25D366;
-      color: #fff;
-      padding: 0.9rem 2.5rem;
-      border-radius: 2px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    .btn-cta-whatsapp:hover {
-      background: #1ea952;
-      transform: translateY(-3px);
-    }
-
-    /* ============================================
-       FLOATING WHATSAPP BUTTON
-       ============================================ */
-    .floating-whatsapp {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 60px;
-      height: 60px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.8rem;
-      z-index: 999;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .floating-whatsapp:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
-    }
-
-    /* ============================================
-       FOOTER
-       ============================================ */
-    footer {
-      background: #061435;
-      color: #FEFADF;
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .footer-brand {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.4rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .footer-location {
-      font-size: 0.95rem;
-      opacity: 0.85;
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-contact {
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-    }
-
-    .footer-social {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .social-link {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 250, 223, 0.1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.2rem;
-      transition: all 0.3s ease;
-    }
-
-    .social-link:hover {
-      background: #4E180C;
-      transform: translateY(-3px);
-    }
-
-    .footer-credit {
-      font-size: 0.85rem;
-      opacity: 0.7;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 250, 223, 0.1);
-    }
-
-    /* ============================================
-       RESPONSIVE DESIGN
-       ============================================ */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-
-      .nav-menu {
-        display: none;
-      }
-
-      .nav-menu.active {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(11, 64, 80, 0.95);
-        flex-direction: column;
-        padding: 2rem 1rem;
-        gap: 1.5rem;
-        display: flex;
-      }
-
-      .package-card.featured {
-        transform: scale(1);
-      }
-
-      .manifesto-container {
-        gap: 2rem;
-      }
-
-      .hero {
-        padding: 1rem;
-      }
-
-      .floating-whatsapp {
-        width: 50px;
-        height: 50px;
-        bottom: 1rem;
-        right: 1rem;
-        font-size: 1.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-menu.active {
-        gap: 1rem;
-        padding: 1.5rem 1rem;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .btn-primary, .btn-secondary {
-        width: 100%;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .section-heading {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shanthi Loops — Slow Travel in Wayanad</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#FEFADF;color:#0B4050;line-height:1.7}
+
+/* NAV */
+nav{
+position:fixed;width:100%;top:0;z-index:999;
+padding:20px 40px;
+display:flex;justify-content:space-between;align-items:center;
+background:rgba(6,20,53,0.4);backdrop-filter:blur(8px);
+}
+nav h1{font-family:'Playfair Display';color:#fff;font-size:20px}
+nav a{color:#fff;margin-left:25px;font-size:14px;text-decoration:none}
+
+/* HERO */
+.hero{
+height:100vh;
+background:
+linear-gradient(rgba(6,20,53,0.6),rgba(6,20,53,0.8)),
+url('https://images.unsplash.com/photo-1501785888041-af3ef285b470');
+background-size:cover;background-position:center;
+display:flex;flex-direction:column;justify-content:center;align-items:center;
+text-align:center;color:#fff;padding:20px;
+}
+.hero h1{
+font-family:'Playfair Display';
+font-size:clamp(2.5rem,6vw,4.5rem);
+margin-bottom:20px;
+}
+.hero p{max-width:600px;margin-bottom:30px}
+
+/* BUTTON */
+.btn{
+background:#FEFADF;color:#0B4050;
+padding:14px 28px;border-radius:30px;
+font-weight:600;
+text-decoration:none;
+display:inline-block;
+}
+
+/* SECTIONS */
+section{padding:100px 20px;text-align:center}
+
+/* MANIFESTO */
+.manifesto{
+background:#0B4050;color:#FEFADF;
+display:flex;flex-wrap:wrap;gap:30px;justify-content:center;
+}
+.manifesto div{max-width:300px}
+.manifesto h3{font-style:italic;font-family:'Playfair Display'}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+/* CARDS */
+.card{
+background:#fff;padding:30px;border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* PACKAGES */
+.package{
+border:1px solid #eee;
+padding:30px;
+border-radius:12px;
+}
+.highlight{
+border:2px solid #4E180C;
+}
+
+/* CTA */
+.cta{
+background:#3F5F4A;
+color:#fff;
+}
+
+/* FOOTER */
+footer{
+background:#061435;
+color:#fff;
+padding:40px;
+text-align:center;
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:#fff;
+padding:15px;
+border-radius:50%;
+font-size:22px;
+text-decoration:none;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
-  <nav id="navbar">
-    <div class="navbar-container">
-      <div class="logo">Shanthi Loops</div>
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="#loops">Loops</a></li>
-        <li><a href="#packages">Packages</a></li>
-        <li><a href="#experiences">Experiences</a></li>
-        <li><a href="#cta">Thirunelly</a></li>
-        <li><a href="#cta" class="btn-cta-nav">Plan your loop</a></li>
-      </ul>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </nav>
+<nav>
+<h1>Shanthi Loops</h1>
+<div>
+<a href="#loops">Loops</a>
+<a href="#packages">Packages</a>
+<a href="#cta">Plan</a>
+</div>
+</nav>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-location">Thirunelly · Wayanad · Kerala</div>
-    <h1>You will come for the spots.<br>You will stay for the people.</h1>
-    <p class="hero-subtitle">Shanthi Loops maps forest trails, river ghats, and village life into walkable circuits. The discovery inside is yours.</p>
-    <div class="hero-buttons">
-      <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior: 'smooth'})">Design my loop</button>
-      <button class="btn-secondary" onclick="document.getElementById('loops').scrollIntoView({behavior: 'smooth'})">See the loops</button>
-    </div>
-  </section>
+<section class="hero">
+<h1>You will come for the spots.<br>You will stay for the people.</h1>
+<p>Shanthi Loops maps forest trails, river ghats, and village life into walkable circuits.</p>
+<a href="#cta" class="btn">Design my loop</a>
+</section>
 
-  <!-- MANIFESTO STRIP -->
-  <section class="manifesto">
-    <div class="manifesto-container">
-      <div class="manifesto-item">
-        <h3>Shanthi</h3>
-        <p>Peace. The quality of a morning before anyone arrives.</p>
-      </div>
-      <div class="manifesto-item">
-        <h3>Loop</h3>
-        <p>A loop is not a tour. It returns you to your origin, changed.</p>
-      </div>
-      <div class="manifesto-item">
-        <h3>Return</h3>
-        <p>Come back to yourself.</p>
-      </div>
-    </div>
-  </section>
+<section class="manifesto">
+<div>
+<h3>Shanthi</h3>
+<p>Peace. The quality of a quiet morning.</p>
+</div>
+<div>
+<h3>Loop</h3>
+<p>A loop is not a tour. It returns you changed.</p>
+</div>
+<div>
+<h3>Return</h3>
+<p>Come back to yourself.</p>
+</div>
+</section>
 
-  <!-- LOOPS SECTION -->
-  <section class="loops" id="loops">
-    <div class="loops-container">
-      <h2 class="section-heading">Three circuits. One map. Yours to walk.</h2>
-      <div class="loops-grid">
-        <div class="loop-card">
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Temple Loop" class="loop-card-image">
-          <div class="loop-card-content">
-            <h3>Temple Loop</h3>
-            <p class="loop-card-meta">3–5 km · Half day</p>
-            <p class="loop-card-desc">Temple → river → village</p>
-          </div>
-        </div>
-        <div class="loop-card">
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop" alt="Forest Edge Loop" class="loop-card-image">
-          <div class="loop-card-content">
-            <h3>Forest Edge Loop</h3>
-            <p class="loop-card-meta">8–12 km · Full day</p>
-            <p class="loop-card-desc">Wildlife, Brahmagiri, guided</p>
-          </div>
-        </div>
-        <div class="loop-card">
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Culture Loop" class="loop-card-image">
-          <div class="loop-card-content">
-            <h3>Culture Loop</h3>
-            <p class="loop-card-meta">Half day</p>
-            <p class="loop-card-desc">Farms, artisans, village</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="loops">
+<h2>Three circuits. One map.</h2>
+<div class="grid">
+<div class="card">
+<h3>Temple Loop</h3>
+<p>3–5 km · Half day</p>
+</div>
+<div class="card">
+<h3>Forest Loop</h3>
+<p>8–12 km · Full day</p>
+</div>
+<div class="card">
+<h3>Culture Loop</h3>
+<p>Village and farm experiences</p>
+</div>
+</div>
+</section>
 
-  <!-- EXPERIENCES SECTION -->
-  <section class="experiences" id="experiences">
-    <div class="experiences-container">
-      <h2 class="experiences-heading">What you'll experience</h2>
-      <div class="experiences-grid">
-        <div class="experience-item">
-          <div class="experience-icon">🌲</div>
-          <h4>Forest Walks</h4>
-          <p>Guided trails through pristine wilderness</p>
-        </div>
-        <div class="experience-item">
-          <div class="experience-icon">🏘️</div>
-          <h4>Village Life</h4>
-          <p>Authentic encounters with local communities</p>
-        </div>
-        <div class="experience-item">
-          <div class="experience-icon">🎨</div>
-          <h4>Cultural Experiences</h4>
-          <p>Learn traditional crafts and stories</p>
-        </div>
-        <div class="experience-item">
-          <div class="experience-icon">🍜</div>
-          <h4>Local Food</h4>
-          <p>Farm-to-table culinary journeys</p>
-        </div>
-        <div class="experience-item">
-          <div class="experience-icon">💧</div>
-          <h4>River Visits</h4>
-          <p>Connect with sacred and natural waters</p>
-        </div>
-        <div class="experience-item">
-          <div class="experience-icon">📸</div>
-          <h4>Slow Moments</h4>
-          <p>Time to breathe, reflect, and be present</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="packages">
+<h2>Packages</h2>
+<div class="grid">
+<div class="package">
+<h3>Backpacker</h3>
+<p>₹799/night</p>
+</div>
+<div class="package highlight">
+<h3>Together</h3>
+<p>₹2200/night</p>
+</div>
+<div class="package">
+<h3>Creator</h3>
+<p>₹1800/night</p>
+</div>
+</div>
+</section>
 
-  <!-- PACKAGES SECTION -->
-  <section class="packages" id="packages">
-    <div class="packages-container">
-      <h2 class="packages-heading">Packages & pricing</h2>
-      <p class="packages-intro">Tell us your budget and your days. We design the loop to fit.</p>
-      <div class="packages-grid">
-        <div class="package-card">
-          <div>
-            <h3>Backpacker Loop</h3>
-            <div class="package-price">From ₹799<span>/night</span></div>
-            <p>For the traveler seeking authentic experiences without the frills. Shared stays, local meals, guided walks.</p>
-          </div>
-        </div>
-        <div class="package-card featured">
-          <div class="package-badge">Most Popular</div>
-          <div>
-            <h3>Together Loop</h3>
-            <div class="package-price">From ₹2200<span>/night</span></div>
-            <p>Crafted for small groups and families. Private guides, curated stays, meals with locals, unforgettable memories.</p>
-          </div>
-        </div>
-        <div class="package-card">
-          <div>
-            <h3>Creator Loop</h3>
-            <div class="package-price">From ₹1800<span>/night</span></div>
-            <p>For photographers, writers, and artists. Photography locations, quiet spaces, creative workshops, deep dives.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="cta" id="cta">
+<h2>Plan your loop</h2>
+<p>Tell us your dates and budget. We design your stay.</p>
+<a href="https://wa.me/919562614314" class="btn">WhatsApp Now</a>
+</section>
 
-  <!-- GALLERY SECTION -->
-  <section class="gallery">
-    <div class="gallery-container">
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop" alt="Forest nature">
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop" alt="Mountain view">
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop" alt="Forest landscape">
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop" alt="Valley views">
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop" alt="Nature trails">
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop" alt="Village scenery">
-        </div>
-      </div>
-    </div>
-  </section>
+<footer>
+<p>Shanthi Loops · Thirunelly, Wayanad</p>
+</footer>
 
-  <!-- CTA SECTION -->
-  <section class="cta" id="cta">
-    <div class="cta-container">
-      <h2>Plan your loop</h2>
-      <p class="cta-text">Tell us your dates, budget, and travel style. We design it for you.</p>
-      <a href="https://wa.me/919876543210" class="btn-cta-whatsapp">WhatsApp Now</a>
-    </div>
-  </section>
-
-  <!-- FLOATING WHATSAPP BUTTON -->
-  <a href="https://wa.me/919876543210" class="floating-whatsapp" title="Contact us on WhatsApp">
-    💬
-  </a>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-brand">Shanthi Loops</div>
-      <p class="footer-location">Thirunelly, Wayanad, Kerala · India</p>
-      <p class="footer-contact"><a href="https://wa.me/919876543210" style="color: #FEFADF;">WhatsApp: +91 98765 43210</a></p>
-      <div class="footer-social">
-        <a href="https://instagram.com/shanthiloops" class="social-link" title="Follow on Instagram">📷</a>
-        <a href="https://facebook.com/shanthiloops" class="social-link" title="Like on Facebook">f</a>
-      </div>
-      <p class="footer-credit">© 2026 Shanthi Loops. Crafted for slow travelers.</p>
-    </div>
-  </footer>
-
-  <!-- SCRIPTS -->
-  <script>
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-    
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    });
-
-    // Close menu when link is clicked
-    const navLinks = navMenu.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-      });
-    });
-
-    // Smooth scroll for hash links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
+<a href="https://wa.me/919562614314" class="whatsapp">💬</a>
 
 </body>
 </html>
