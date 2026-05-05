@@ -15,11 +15,30 @@ background:#FEFADF;
 color:#0B4050;
 }
 
+/* NAV */
+nav{
+position:fixed;
+width:100%;
+top:0;
+background:rgba(6,20,53,0.6);
+backdrop-filter:blur(8px);
+display:flex;
+justify-content:space-between;
+padding:15px 30px;
+z-index:999;
+}
+nav a{
+color:#fff;
+margin-left:20px;
+text-decoration:none;
+font-size:14px;
+}
+
 /* HERO */
 .hero{
 height:100vh;
 background:
-linear-gradient(rgba(6,20,53,0.5),rgba(6,20,53,0.8)),
+linear-gradient(rgba(6,20,53,0.6),rgba(6,20,53,0.9)),
 url('https://images.unsplash.com/photo-1501785888041-af3ef285b470');
 background-size:cover;
 background-position:center;
@@ -30,71 +49,69 @@ text-align:center;
 color:white;
 padding:20px;
 }
-
 .hero h1{
 font-family:'Playfair Display';
-font-size:4rem;
-max-width:800px;
+font-size:clamp(2.5rem,6vw,4.5rem);
 line-height:1.2;
 }
-
 .hero p{
-max-width:500px;
+max-width:600px;
 margin:20px auto;
-font-size:1.1rem;
 }
 
+/* BUTTON */
 .btn{
 background:#FEFADF;
 color:#0B4050;
 padding:14px 28px;
-border-radius:40px;
-font-weight:600;
+border-radius:30px;
 text-decoration:none;
+font-weight:600;
+display:inline-block;
 }
 
-/* SECTION */
+/* SECTIONS */
 section{
 padding:100px 20px;
 text-align:center;
 }
 
-/* IMAGE SECTION */
+/* SPLIT SECTION */
 .split{
 display:flex;
 flex-wrap:wrap;
 align-items:center;
 }
-
 .split img{
 width:50%;
-min-height:400px;
+height:400px;
 object-fit:cover;
 }
-
 .split div{
 width:50%;
 padding:40px;
 }
 
-@media(max-width:768px){
-.split img,.split div{width:100%}
-.hero h1{font-size:2.2rem}
-}
-
-/* CARDS */
-.cards{
+/* GRID */
+.grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:30px;
 margin-top:40px;
 }
 
+/* CARD */
 .card{
 background:white;
 padding:30px;
 border-radius:12px;
 box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* DARK SECTION */
+.dark{
+background:#0B4050;
+color:white;
 }
 
 /* CTA */
@@ -103,7 +120,7 @@ background:#3F5F4A;
 color:white;
 }
 
-/* WHATSAPP */
+/* WHATSAPP FLOAT */
 .whatsapp{
 position:fixed;
 bottom:20px;
@@ -115,53 +132,86 @@ border-radius:50%;
 font-size:22px;
 text-decoration:none;
 }
+
+/* MOBILE */
+@media(max-width:768px){
+.split img,.split div{width:100%}
+.hero h1{font-size:2rem}
+}
 </style>
 </head>
 
 <body>
 
+<nav>
+<div style="color:white;font-family:Playfair Display;">Shanthi Loops</div>
+<div>
+<a href="#loops">Loops</a>
+<a href="#packages">Packages</a>
+<a href="#cta">Plan</a>
+</div>
+</nav>
+
 <section class="hero">
 <div>
-<h1>You will come for the spots.<br>You will stay for the people.</h1>
-<p>Slow living in forests, rivers, and village life.</p>
-<a href="#cta" class="btn">Design my loop</a>
+<h1>You come for the places.<br>You stay for the people.</h1>
+<p>Shanthi Loops maps forest trails, river ghats, and village life into walkable circuits.</p>
+<a href="#cta" class="btn">Plan my visit</a>
 </div>
 </section>
 
-<section>
-<h2>A different way to travel</h2>
-<p>Not a tour. A return to yourself.</p>
+<section id="loops">
+<h2>Three circuits. One map.</h2>
+<div class="grid">
+<div class="card">
+<h3>Temple Loop</h3>
+<p>Half day · Walking</p>
+</div>
+<div class="card">
+<h3>Forest Edge Loop</h3>
+<p>Full day · Guided</p>
+</div>
+<div class="card">
+<h3>Culture Loop</h3>
+<p>Village · Farms · Artisans</p>
+</div>
+</div>
 </section>
 
 <section class="split">
 <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
 <div>
-<h2>The Loops</h2>
-<p>Walk through forest, river, and village — each loop changes you.</p>
+<h2>A loop is not a tour</h2>
+<p>It returns you to your origin, changed.</p>
 </div>
 </section>
 
-<section>
+<section id="packages">
 <h2>Packages</h2>
-<div class="cards">
+<div class="grid">
 <div class="card">
 <h3>Backpacker</h3>
-<p>₹799/night</p>
+<p>₹3000 · 2 nights</p>
 </div>
 <div class="card">
 <h3>Together</h3>
-<p>₹2200/night</p>
+<p>₹4000 / night</p>
 </div>
 <div class="card">
 <h3>Creator</h3>
-<p>₹1800/night</p>
+<p>₹9999 / week</p>
 </div>
 </div>
 </section>
 
+<section class="dark">
+<h2>How it works</h2>
+<p>Tell us your plan → We design → You arrive → We guide → You explore</p>
+</section>
+
 <section class="cta" id="cta">
-<h2>Plan your loop</h2>
-<p>Tell us your dates and we design it.</p>
+<h2>Plan your visit</h2>
+<p>Tell us your dates and budget. We’ll build your loop.</p>
 <a href="https://wa.me/919562614314" class="btn">WhatsApp Now</a>
 </section>
 
